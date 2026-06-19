@@ -1,0 +1,48 @@
+# 技能配置文件
+
+# 系统技能
+system:
+  execute_command:
+    enabled: true
+    description: "执行系统命令"
+    timeout: 30
+    whitelist_mode: true
+  list_processes:
+    enabled: true
+    description: "列出运行中的进程"
+  get_system_info:
+    enabled: true
+    description: "获取系统信息"
+
+# 文件技能
+file:
+  read_file:
+    enabled: true
+    description: "读取文件内容"
+    max_size: 10MB
+  write_file:
+    enabled: true
+    description: "写入文件内容"
+    backup: true
+  list_directory:
+    enabled: true
+    description: "列出目录内容"
+  search_files:
+    enabled: true
+    description: "搜索文件"
+    max_results: 100
+
+# 网络技能
+web:
+  http_request:
+    enabled: true
+    description: "发送 HTTP 请求"
+    timeout: 30
+  fetch_webpage:
+    enabled: true
+    description: "抓取网页内容"
+    user_agent: "MyAgent/0.1.0"
+
+# 自定义技能
+custom:
+  # 用户可以在这里添加自定义技能配置

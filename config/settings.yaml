@@ -1,0 +1,98 @@
+# 系统配置文件
+
+# Agent 基础配置
+agent:
+  name: "MyAgent"
+  version: "0.1.0"
+  description: "个人智能助手"
+  max_memory_turns: 20
+  temperature: 0.7
+  max_tokens: 4096
+
+# LLM 配置
+llm:
+  provider: "deepseek"  # claude, openai, deepseek, kimi, minimax
+  models:
+    claude:
+      model: "claude-3-5-sonnet-20241022"
+      max_tokens: 4096
+      temperature: 0.7
+    openai:
+      model: "gpt-4o"
+      max_tokens: 4096
+      temperature: 0.7
+    deepseek:
+      model: "deepseek-chat"
+      max_tokens: 4096
+      temperature: 0.7
+    kimi:
+      model: "moonshot-v1-8k"
+      max_tokens: 4096
+      temperature: 0.7
+    minimax:
+      model: "abab6.5-chat"
+      max_tokens: 4096
+      temperature: 0.7
+
+# 记忆系统配置
+memory:
+  short_term:
+    enabled: true
+    max_turns: 20
+    database: "./data/sqlite/memory.db"
+  long_term:
+    enabled: true
+    database: "./data/sqlite/knowledge.db"
+  vector:
+    enabled: false  # 阶段二启用
+    database: "./data/chroma"
+    collection: "agent_memory"
+
+# 技能配置
+skills:
+  enabled: true
+  auto_load: true
+  skill_dirs:
+    - "./src/skills/system"
+    - "./src/skills/file"
+    - "./src/skills/web"
+  security:
+    allowed_commands:
+      - "dir"
+      - "ls"
+      - "cat"
+      - "type"
+      - "echo"
+      - "python"
+      - "pip"
+      - "git"
+      - "npm"
+      - "node"
+    max_command_timeout: 30
+    sandbox_mode: false
+
+# 通道配置
+channels:
+  cli:
+    enabled: true
+    prompt_style: ">"
+    history_file: "./data/.cli_history"
+  api:
+    enabled: false  # 阶段二启用
+    host: "127.0.0.1"
+    port: 8000
+  webui:
+    enabled: false  # 阶段二启用
+
+# 日志配置
+logging:
+  level: "INFO"
+  file: "./logs/agent.log"
+  rotation: "10 MB"
+  retention: "7 days"
+  format: "{time:YYYY-MM-DD HH:mm:ss} | {level} | {message}"
+
+# 安全配置
+security:
+  encrypt_sensitive_data: true
+  api_key_encryption_key: ""  # 留空则自动生成
